@@ -20,6 +20,14 @@ class HomeScreen extends StatelessWidget {
             child: IconButton(onPressed: (){
               controller.deleteTheDatabase();
             }, icon: const Icon(Icons.remove),),
+
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: IconButton(onPressed: (){
+              controller.insertData();
+            }, icon: const Icon(Icons.add),),
+
           ),
         ],
         centerTitle: true,
