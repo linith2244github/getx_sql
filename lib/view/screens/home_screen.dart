@@ -1,37 +1,37 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:getx_sqflite/controller/controller.dart';
+import 'package:getx_sqflite/view/screens/edit_screen.dart';
+import 'package:getx_sqflite/view/widgets/todo_item.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final controller = Get.put(SQLController());
+  final control = Get.put(SQLController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        title: const Text('Todo App'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: IconButton(onPressed: (){
-              controller.deleteTheDatabase();
-            }, icon: const Icon(Icons.remove),),
-
+        appBar: AppBar(
+          title: const Text('Todo App'),
+          centerTitle: true,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.to(() => EditScreen(), transition: Transition.downToUp);
+          },
+          child: const Icon(Icons.add),
+        ),
+        body: GetBuilder<SQLController>(
+          builder: (controller) => ListView.builder(
+            itemCount: controller.list.length,
+            itemBuilder: (context, index) => TodoItem(
+              controller: controller,
+              index: index,
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: IconButton(onPressed: (){
-              controller.insertData();
-            }, icon: const Icon(Icons.add),),
-
-          ),
-        ],
-        centerTitle: true,
-      ),
-    );
+        ));
   }
 }
