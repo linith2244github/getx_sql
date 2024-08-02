@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // final int a = 10;
   // print('a');
+  // for print value
 
   // This widget is the root of your application.
   @override
