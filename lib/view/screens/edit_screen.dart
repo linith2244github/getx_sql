@@ -3,14 +3,35 @@ import 'package:get/get.dart';
 import 'package:getx_sqflite/controller/controller.dart';
 import 'package:getx_sqflite/shared/custom_text_form_field.dart';
 
-class EditScreen extends StatelessWidget {
-  EditScreen({super.key, this.id});
+class EditScreen extends StatefulWidget {
+  EditScreen({super.key, this.id, this.title, this.desc, this.time});
   final int? id;
+  final String? title;
+  final String? desc;
+  final String? time;
+
+  @override
+  State<EditScreen> createState() => _EditScreenState();
+}
+
+class _EditScreenState extends State<EditScreen> {
   final titleController = TextEditingController();
+
   final timeController = TextEditingController();
+
   final desController = TextEditingController();
 
-  final controller = Get.put(SQLController());
+  final SQLController controller = Get.find();
+
+  @override
+  void initState() {
+    if(controller.updateTaskData){
+      titleController.text = widget.title.toString();
+      desController.text = widget.desc.toString();
+      timeController.text = widget.time.toString();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +65,7 @@ class EditScreen extends StatelessWidget {
                       time: timeController.text);
                 } else {
                   controller.updateData(
-                      id: id!,
+                      id: widget.id!,
                       title: titleController.text,
                       description: desController.text,
                       time: timeController.text);

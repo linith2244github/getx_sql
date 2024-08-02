@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_sqflite/config/task_bindings.dart';
 import 'package:getx_sqflite/view/screens/home_screen.dart';
 
 void main() {
@@ -12,11 +13,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    TasksBindings().dependencies();
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.light(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.dark,
+      initialBinding: TasksBindings(),
       home: HomeScreen(),
     );
   }
