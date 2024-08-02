@@ -70,6 +70,7 @@ class _EditScreenState extends State<EditScreen> {
                       description: desController.text,
                       time: timeController.text);
                 }
+                controller.updateTaskData = false;
               },
               textColor: Colors.white,
               color: Colors.red,
